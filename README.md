@@ -8,4 +8,4 @@ Playing with Electron and MySQL
 - Create a model for the DB and implement it
 - Fill it with sample data
 - Create a UI page to search through DB
-- Be happy about it
+- Be able to keep database after having closed the app
