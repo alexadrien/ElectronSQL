@@ -2,8 +2,8 @@
 Playing with Electron and MySQL
 
 # TODO
-- (Done) Add basic structure for an Electron application
-- Adding support and connexion to a MySQL Database
+- ~~Add basic structure for an Electron application~~
+- ~~Adding support and connexion to a MySQL Database~~
 - Create a simple UI
 - Create a model for the DB and implement it
 - Fill it with sample data
