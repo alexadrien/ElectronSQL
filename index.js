@@ -21,6 +21,11 @@ var SQL = require('sql.js')
     // Open the DevTools.
     win.webContents.openDevTools()
 
+    db = new SQL.Database()
+    db.run("CREATE TABLE firsttable('col1' varchar, 'col2' varchar);")
+    db.run("INSERT INTO firsttable VALUES('ok1', 'ok2');")
+    console.log(db.exec('SELECT * FROM firsttable;'))
+
     // Emitted when the window is closed.
     win.on('closed', () => {
       // Dereference the window object, usually you would store windows
