@@ -20,7 +20,7 @@ var SQL = require('sql.js')
     }))
 
     // Open the DevTools.
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 
     db = new SQL.Database()
     db.run("CREATE TABLE firsttable('col1' varchar, 'col2' varchar);")
