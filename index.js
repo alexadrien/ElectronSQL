@@ -2,6 +2,7 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 var SQL = require('sql.js')
+var fs = require('fs')
 
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -26,6 +27,7 @@ var SQL = require('sql.js')
     db.run("CREATE TABLE firsttable('col1' varchar, 'col2' varchar);")
     db.run("INSERT INTO firsttable VALUES('ok1', 'ok2');")
     console.log(db.exec('SELECT * FROM firsttable;'))
+    const contentInitDb = fs.readFileSync('db_init.sql', 'utf8');
 
     // Emitted when the window is closed.
     win.on('closed', () => {
