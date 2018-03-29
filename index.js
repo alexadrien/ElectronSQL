@@ -23,11 +23,16 @@ var fs = require('fs')
     // Open the DevTools.
     //win.webContents.openDevTools()
 
-    db = new SQL.Database()
-    db.run("CREATE TABLE firsttable('col1' varchar, 'col2' varchar);")
-    db.run("INSERT INTO firsttable VALUES('ok1', 'ok2');")
-    console.log(db.exec('SELECT * FROM firsttable;'))
     const contentInitDb = fs.readFileSync('db_init.sql', 'utf8');
+    console.log(contentInitDb)
+
+    try{
+      db = new SQL.Database()
+      db.run(contentInitDb)
+      console.log(db.export())
+    }catch(err){
+      console.log(err)
+    }
 
     // Emitted when the window is closed.
     win.on('closed', () => {
