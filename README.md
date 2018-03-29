@@ -6,6 +6,8 @@ Playing with Electron and MySQL
 - ~~Adding support and connexion to a MySQL Database~~
 - ~~Create a simple UI~~
 - ~~Create a model for the DB and implement it~~
-- Fill it with sample data
-- Create a UI page to search through DB
+- Search through file system at startup
+- Add files from parsing to db at startup
+- Add feature to UI page to search through DB
 - Be able to keep database after having closed the app
+- Create loading screen during parsing time
