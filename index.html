@@ -1,13 +1,61 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>Hello World!</title>
-    </head>
-    <body>
-      <h1>Hello World!</h1>
-      We are using node <script>document.write(process.versions.node)</script>,
-      Chrome <script>document.write(process.versions.chrome)</script>,
-      and Electron <script>document.write(process.versions.electron)</script>.
-    </body>
-  </html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ElectronSQL</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    #searchResult {
+      height: 90vh;
+      overflow: scroll;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="w3-bar w3-green">
+    <div href="#" class="w3-bar-item">ElectronSQL</div>
+  </header>
+  <main class="w3-row">
+    <div class="w3-col l6 m6 s6">
+      <div class="w3-container" id="searchForm">
+        <ul class="w3-ul">
+          <li class="w3-li">
+            <div>Filename</div>
+            <input type="text" class="w3-input" />
+          </li>
+          <li class="w3-li">
+            <input type="submit" class="w3-input" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="w3-col l6 m6 s6">
+      <div class="w3-container" id="searchResult">
+        <table class="w3-table">
+          <tr>
+            <th>Filename</th>
+            <th>Created</th>
+            <th>type</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+  <footer class="w3-bar w3-green w3-display-bottommiddle">
+    <div class="w3-container">
+      ElectronSQL - Work on a software with file indexing
+    </div>
+  </footer>
+  <script>
+    var table = document.querySelector('#searchResult > table')
+    for (var i = 0; i < 100; i++) {
+      var newLine = document.createElement('tr')
+      newLine.innerHTML = "<td>ok.json</td><td>2018-04-01</td><td>json</td>"
+      table.appendChild(newLine)
+    }
+  </script>
+</body>
+
+</html>
