@@ -9,6 +9,19 @@ var fs = require('fs')
   let win
   let db
 
+function addFileToDb(filePath, thedb){
+  const fileExt = path.extname(filePath).substring(1)
+  const fileName = path.basename(filePath, '.'+fileExt)
+  var queryString = "INSERT INTO `files` VALUES ('";
+  queryString += fileName
+  queryString += "', '"
+  queryString += fileExt
+  queryString += "', '"
+  queryString += filePath
+  queryString += "');"
+  thedb.run(queryString)
+}
+
 function exploreDirRec(dirpath, fileCallback){
   // console.log(dirpath);
   const currentDirList = fs.readdirSync(dirpath)
