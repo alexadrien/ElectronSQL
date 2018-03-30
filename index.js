@@ -1,15 +1,18 @@
-const {app, BrowserWindow} = require('electron')
+const {
+  app,
+  BrowserWindow
+} = require('electron')
 const path = require('path')
 const url = require('url')
 var SQL = require('sql.js')
 var fs = require('fs')
 
-  let win
-  let db
+let win
+let db
 
-function addFileToDb(filePath, thedb){
+function addFileToDb(filePath, thedb) {
   const fileExt = path.extname(filePath).substring(1)
-  const fileName = path.basename(filePath, '.'+fileExt)
+  const fileName = path.basename(filePath, '.' + fileExt)
   var queryString = "INSERT INTO `files` VALUES ('";
   queryString += fileName
   queryString += "', '"
@@ -20,31 +23,31 @@ function addFileToDb(filePath, thedb){
   thedb.run(queryString)
 }
 
-function exploreDirRec(dirpath, fileCallback){
+function exploreDirRec(dirpath, fileCallback) {
   // console.log(dirpath);
   const currentDirList = fs.readdirSync(dirpath)
-  for(var i in currentDirList){
+  for (var i in currentDirList) {
     var currentCompletePath = path.join(dirpath, currentDirList[i])
     var isDir = fs.lstatSync(currentCompletePath).isDirectory()
-    if(isDir){//is dir
+    if (isDir) { //is dir
       exploreDirRec(currentCompletePath, fileCallback);
-    } else{
+    } else {
       fileCallback(currentCompletePath);
     }
   }
 }
 
-function exploreDirList(dirpath, fileCallback){
+function exploreDirList(dirpath, fileCallback) {
   var foldersToExplore = [dirpath]
-  while(foldersToExplore.length>0){
+  while (foldersToExplore.length > 0) {
     // console.log(foldersToExplore[0]);
     var currentDirList = fs.readdirSync(foldersToExplore[0])
-    for(var i in currentDirList){
+    for (var i in currentDirList) {
       var currentCompletePath = path.join(foldersToExplore[0], currentDirList[i])
       var isDir = fs.lstatSync(currentCompletePath).isDirectory()
-      if(isDir){//is dir
+      if (isDir) { //is dir
         foldersToExplore.push(currentCompletePath)
-      } else{
+      } else {
         fileCallback(currentCompletePath)
       }
     }
@@ -52,18 +55,25 @@ function exploreDirList(dirpath, fileCallback){
   }
 }
 
-  function createWindow () {
-    win = new BrowserWindow({width: 800, height: 600})
+function createWindow() {
+  win = new BrowserWindow({
+    width: 800,
+    height: 600
+  })
 
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
 
-    //win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 
     const contentInitDb = fs.readFileSync('db_init.sql', 'utf8');
+  win.on('closed', () => {
+    win = null
+  })
+}
 
     try{
       db = new SQL.Database()
@@ -71,22 +81,16 @@ function exploreDirList(dirpath, fileCallback){
     }catch(err){
       console.log(err)
     }
+app.on('ready', createWindow)
 
-    win.on('closed', () => {
-      win = null
-    })
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
+})
 
-  app.on('ready', createWindow)
-
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-      app.quit()
-    }
-  })
-
-  app.on('activate', () => {
-    if (win === null) {
-      createWindow()
-    }
-  })
+app.on('activate', () => {
+  if (win === null) {
+    createWindow()
+  }
+})
