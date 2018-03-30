@@ -6,6 +6,7 @@ const path = require('path')
 const url = require('url')
 var SQL = require('sql.js')
 var fs = require('fs')
+var xmlParseString = require('xml2js').parseString;
 
 let win
 let db
