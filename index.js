@@ -9,6 +9,19 @@ var fs = require('fs')
   let win
   let db
 
+function exploreDirRec(dirpath, fileCallback){
+  // console.log(dirpath);
+  const currentDirList = fs.readdirSync(dirpath)
+  for(var i in currentDirList){
+    var currentCompletePath = path.join(dirpath, currentDirList[i])
+    var isDir = fs.lstatSync(currentCompletePath).isDirectory()
+    if(isDir){//is dir
+      exploreDirRec(currentCompletePath, fileCallback);
+    } else{
+      fileCallback(currentCompletePath);
+    }
+  }
+}
   function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({width: 800, height: 600})
