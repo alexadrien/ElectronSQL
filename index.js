@@ -69,18 +69,11 @@ function createWindow() {
 
   // win.webContents.openDevTools()
 
-    const contentInitDb = fs.readFileSync('db_init.sql', 'utf8');
   win.on('closed', () => {
     win = null
   })
 }
 
-    try{
-      db = new SQL.Database()
-      db.run(contentInitDb)
-    }catch(err){
-      console.log(err)
-    }
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
