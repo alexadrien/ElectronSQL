@@ -72,6 +72,12 @@ function exploreDirList(dirpath, fileCallback) {
   }
 }
 
+function createDatabase(){
+  db = new SQL.Database();
+  const initStr = fs.readFileSync('db_init.sql', 'utf8');
+  db.run(initStr)
+}
+
 function createWindow() {
   win = new BrowserWindow({
     width: 800,
