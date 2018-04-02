@@ -36,6 +36,16 @@
     </div>
   </footer>
   <script>
+    function displayAllData(allTheData){
+      for(var i in allTheData){
+        var currentLine = document.createElement('tr')
+        for(var j in allTheData[i]){
+          var currentCol = document.createElement('td')
+          currentCol.innerHTML = allTheData[i][j]
+          currentLine.appendChild(currentCol)
+        }
+        document.querySelector('table').appendChild(currentLine)
+      }
     }
   </script>
 </body>
