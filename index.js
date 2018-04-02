@@ -1,11 +1,13 @@
 const {
   app,
-  BrowserWindow
+  BrowserWindow,
+  dialog
 } = require('electron')
 const path = require('path')
 const url = require('url')
 var SQL = require('sql.js')
 var fs = require('fs')
+var assert = require('assert')
 var xmlParseString = require('xml2js').parseString;
 
 let win
