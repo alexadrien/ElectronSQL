@@ -1,5 +1,5 @@
 # ElectronSQL
-Playing with Electron and MySQL
+Playing with Electron, MySQL and WAV metadata
 
 # TODO
 - ~~Add basic structure for an Electron application~~
