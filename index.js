@@ -93,6 +93,17 @@ function createWindow() {
   // win.webContents.openDevTools()
   createDatabase()
 
+  const pathToParse = dialog.showOpenDialog({
+    properties: ['openFile', 'openDirectory', 'multiSelections'],
+    title: "Please select which folder you would like to analyze"
+  }, function(filePaths, bookmarks){
+    for (var i in filePaths){
+      exploreDirList(filePaths[i], function(item){addFileToDb(item, db)})
+    }
+    const currentData = getAllDbData()
+    win.webContents.send('db-data', currentData[0].values);
+  })
+
   win.on('closed', () => {
     win = null
   })
