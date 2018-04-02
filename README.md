@@ -11,3 +11,8 @@ Playing with Electron, MySQL and WAV metadata
 - Add feature to UI page to search through DB
 - Be able to keep database after having closed the app
 - Create loading screen during parsing time
+
+# Installation guide
+This is a simple Electron app so you simply need to ```npm install``` everything.
+
+If anything goes wrong, please raise an issue.
