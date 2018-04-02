@@ -103,6 +103,7 @@ function createWindow() {
   }))
 
   // win.webContents.openDevTools()
+
   createDatabase()
 
   const pathToParse = dialog.showOpenDialog({
