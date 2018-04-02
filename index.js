@@ -91,6 +91,7 @@ function createWindow() {
   }))
 
   // win.webContents.openDevTools()
+  createDatabase()
 
   win.on('closed', () => {
     win = null
