@@ -112,6 +112,10 @@ app.on('activate', () => {
   }
 })
 
+function getAllDbData(){
+  return(db.exec('SELECT * FROM `files`'))
+}
+
 function readMetaFromFile(filePath){
   const fileBuf = fs.readFileSync(filePath)
   const chunkNameBuf = fileBuf.slice(0,4)
