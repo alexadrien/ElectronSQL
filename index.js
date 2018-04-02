@@ -16,14 +16,26 @@ let db
 function addFileToDb(filePath, thedb) {
   const fileExt = path.extname(filePath).substring(1)
   const fileName = path.basename(filePath, '.' + fileExt)
-  var queryString = "INSERT INTO `files` VALUES ('";
-  queryString += fileName
-  queryString += "', '"
-  queryString += fileExt
-  queryString += "', '"
-  queryString += filePath
-  queryString += "');"
-  thedb.run(queryString)
+  const currentFileMeta = readMetaFromFile(filePath)
+  if(currentFileMeta != undefined){
+    const extractedMetaData = extractMetaValues(currentFileMeta)
+    for (var i in extractedMetaData){
+      var queryString = "INSERT INTO `files` VALUES ('";
+      queryString += fileName
+      queryString += "', '"
+      queryString += fileExt
+      queryString += "', '"
+      queryString += filePath
+      queryString += "', '"
+      queryString += extractedMetaData[i].metaname
+      queryString += "', '"
+      queryString += extractedMetaData[i].metavalue
+      queryString += "');"
+      thedb.run(queryString)
+    }
+  }
+}
+
 function extractMetaValues(metaJson){
   var returnValue = []
   if(metaJson.BWFXML.STEINBERG != undefined){
