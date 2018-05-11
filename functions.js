@@ -1,6 +1,10 @@
+var meta = require("./functions/meta.js");
+var db = require("./functions/db.js");
+var folder = require("./functions/folder.js");
+
 module.exports = {
-  readMetaFromFile: require("./functions/meta.js").readMetaFromFile,
-  createDatabase: require("./functions/db.js").createDatabase,
-  addFileToDb: require("./functions/db.js").addFileToDb,
-  exploreDirList: require("./functions/folder.js").exploreDirList
+  readMetaFromFile: meta.readMetaFromFile,
+  createDatabase: db.createDatabase,
+  addFileToDb: db.addFileToDb,
+  exploreDirList: folder.exploreDirList
 };
