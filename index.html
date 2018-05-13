@@ -47,8 +47,9 @@
         document.querySelector('table').appendChild(currentLine)
       }
     }
-
     require('electron').ipcRenderer.on('db-data', (event, message) => {
+      console.log(event);
+      console.log(message);
           displayAllData(message)
         })
   </script>

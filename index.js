@@ -1,55 +1,41 @@
-const { app, BrowserWindow, dialog } = require("electron");
-const path = require("path");
-const url = require("url");
-var SQL = require("sql.js");
-var fs = require("fs");
-var assert = require("assert");
-var xmlParseString = require("xml2js").parseString;
-var functions = require("./functions.js");
+import "babel-polyfill";
+import createDatabase from "./functions/db/createDatabase";
+import askForPath from "./functions/electron/askForPath";
+import loadWindow from "./functions/electron/loadWindow";
+import newWindow from "./functions/electron/newWindow";
+import sendDataToFront from "./functions/electron/sendDataToFront";
+import addFilesToDb from "./functions/folder/addFilesToDb";
+import { app, BrowserWindow, webContents } from "electron";
 
 let win;
 let db;
 
-function createWindow() {
-  win = new BrowserWindow({
-    width: 800,
-    height: 600
+async function doSomeStuff() {
+  win.webContents.on("did-finish-load", async function() {
+    console.log(win.webContents.isWaitingForResponse());
+    db = await createDatabase();
+    const pathToParse = await askForPath();
+    await addFilesToDb(pathToParse, db);
+    await sendDataToFront(win, db);
   });
+}
 
-  win.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "index.html"),
-      protocol: "file:",
-      slashes: true
-    })
-  );
+async function createWindow() {
+  win = newWindow();
+  win = await loadWindow(win);
 
-  // win.webContents.openDevTools()
-
-  db = functions.createDatabase();
-
-  const pathToParse = dialog.showOpenDialog(
-    {
-      properties: ["openFile", "openDirectory", "multiSelections"],
-      title: "Please select which folder you would like to analyze"
-    },
-    function(filePaths, bookmarks) {
-      for (var i in filePaths) {
-        functions.exploreDirList(filePaths[i], function(item) {
-          functions.addFileToDb(item, db);
-        });
-      }
-      const currentData = getAllDbData();
-      win.webContents.send("db-data", currentData[0].values);
-    }
-  );
+  win.on("show", async () => {
+    await doSomeStuff();
+  });
 
   win.on("closed", () => {
     win = null;
   });
 }
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  createWindow();
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -57,12 +43,8 @@ app.on("window-all-closed", () => {
   }
 });
 
-app.on("activate", () => {
-  if (win === null) {
-    createWindow();
-  }
-});
-
-function getAllDbData() {
-  return db.exec("SELECT * FROM `files`");
-}
+// app.on("activate", () => {
+//   if (win === null) {
+//     createWindow();
+//   }
+// });
