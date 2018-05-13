@@ -8,8 +8,8 @@ export default function(metaJson) {
     assert(metaJson.BWFXML.STEINBERG[0].ATTR_LIST.length == 1);
     for (var i in metaJson.BWFXML.STEINBERG[0].ATTR_LIST[0].ATTR) {
       returnValue.push({
-        metaname: metaJson.BWFXML.STEINBERG[0].ATTR_LIST[0].ATTR[i].NAME,
-        metavalue: metaJson.BWFXML.STEINBERG[0].ATTR_LIST[0].ATTR[i].VALUE
+        metaname: metaJson.BWFXML.STEINBERG[0].ATTR_LIST[0].ATTR[i].NAME[0],
+        metavalue: metaJson.BWFXML.STEINBERG[0].ATTR_LIST[0].ATTR[i].VALUE[0]
       });
     }
   }
