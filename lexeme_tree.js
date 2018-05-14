@@ -25,9 +25,6 @@
 			"children" : [
 				{ "id" : "dans_le_lieu",
 					"children" : [
-//						{ "id" : "caractere", "values" : ["calme", "agite"] },
-//						{ "id" : "voix", "values" : ["none", "voix"] },
-//						{ "id" : "densite", "values" : ["vide", "foule"] },
 						{ "id" : "humain",
 							"children" : [
 								{ "id" : "presence", "values" : ["none", "presence"] },
@@ -40,6 +37,8 @@
 							"children" : [
 								{ "id" : "machine", "values" : ["machine", "moteur", "ventilateur"] },
 								{ "id" : "electricite", "values" : ["hum", "buzz", "neon", "induction"] },
+								{ "id" : "eau", "values" : ["ecoulement", "tuyau"] },
+
 							]
 						}
 
@@ -48,7 +47,7 @@
 				{ "id" : "hors_du_lieu",
 					"children" : [
 						{ "id" : "avion", "values" : ["none", "avion"] },
-						{ "id" : "circulation", "values" : ["none", "avion"] },
+						{ "id" : "circulation", "values" : ["none", "circulation"] },
 						{ "id" : "oiseaux", "values" : ["none", "oiseaux"] }
 					]
 				}
