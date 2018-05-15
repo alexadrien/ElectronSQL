@@ -4,24 +4,19 @@ import sendDataToFront from "./../electron/sendDataToFront";
 import exploreDirList from "./../folder/exploreDirList";
 import addFileToDb from "./../db/addFileToDb";
 import getFilename from "./../folder/getFilename";
-import findChainByValue from "../lexeme/findChainByValue";
 
 export default async function(win, db) {
   db = await createDatabase();
+
   const pathToParse = await askForPath();
+
   const allFiles = await exploreDirList(pathToParse);
 
-  // findChainByValue("petit");
+  allFiles.forEach(filepath => {
+    addFileToDb(filepath, db);
+  });
 
-  // allFiles.forEach(function(filePath) {
-  //   console.log(getFilename(filePath));
-  // });
-
-  // allFiles.forEach(function(filePath) {
-  //   addFileToDb(filePath, db);
-  // });
-
-  // await sendDataToFront(win, db);
+  await sendDataToFront(win, db);
 }
 
 function process() {

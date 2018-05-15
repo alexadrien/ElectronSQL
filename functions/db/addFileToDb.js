@@ -7,7 +7,8 @@ export default async function(filePath, thedb) {
   var queryString = "INSERT INTO `files` VALUES ('";
   queryString += fileName;
   queryString += "', '";
-  queryString += fileName;
+  queryString += "', '";
+  queryString += fileExt;
   queryString += "', '";
   queryString += filePath;
   queryString += "');";
