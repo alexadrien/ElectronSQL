@@ -21,6 +21,7 @@ Avant le 19/05 :
 Doit être prêt pour la soutenance (entre le 11 et le 22 juin) :
   - Implémentation de _lexeme_tree.js_ et de la recherche par similitude.
   - Équivalences complexes (_i.e._ certaines chaînes ne sont que des débuts de mots, _etc._).
+  - Ajouter des cas d'exception au _stemmer_.
   - Ajout du _player_ audio (avec _waveform_).
   - Faire la version _Analyse Sémantique Latente_ (:BIG: :Low-prio:).
 
