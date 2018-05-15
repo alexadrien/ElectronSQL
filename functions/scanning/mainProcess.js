@@ -4,6 +4,14 @@ import sendDataToFront from "./../electron/sendDataToFront";
 import exploreDirList from "./../folder/exploreDirList";
 import addFileToDb from "./../db/addFileToDb";
 import getFilename from "./../folder/getFilename";
+import getAllNames from "../db/getAllNames";
+import getAllPureFilename from "../db/getAllPureFilename";
+import cleaning from "../preprocessing/cleaning";
+import rooting from "../preprocessing/rooting";
+import addPureFilename from "../db/addPureFilename";
+import addSemantique from "../db/addSemantique";
+import getSignature from "../semantique/getSignature";
+import getAllDbData from "../db/getAllDbData";
 
 export default async function(win, db) {
   db = await createDatabase();
@@ -12,20 +20,41 @@ export default async function(win, db) {
 
   const allFiles = await exploreDirList(pathToParse);
 
-  allFiles.forEach(filepath => {
-    addFileToDb(filepath, db);
-  });
+  await Promise.all(
+    allFiles.map(async filepath => {
+      await addFileToDb(filepath, db);
+    })
+  );
+
+  const allFilenames = (await getAllNames(db))[0].values;
+
+  await Promise.all(
+    allFilenames.map(async ([rowid, filename]) => {
+      const cleaned = cleaning(filename);
+      const pureFilename = rooting(cleaned);
+      await addPureFilename(rowid, pureFilename, db);
+    })
+  );
+
+  const allPureFilenames = (await getAllPureFilename(db))[0].values;
+
+  await Promise.all(
+    allPureFilenames.map(async ([rowid, pureFilename]) => {
+      const sematiqueSignature = await getSignature(pureFilename);
+      await addSemantique(rowid, sematiqueSignature, db);
+    })
+  );
 
   await sendDataToFront(win, db);
 }
 
 function process() {
   //charger derniere db (pas du tout prio)
-  //demande dossier a scanner
-  //scanne le dossier
-  // pour chaque fichidr trouvé
-  // mettre son nom extension, et emplacement dans la db
-  // pour chaque nom de la db
+  //ok demande dossier a scanner
+  //ok scanne le dossier
+  //ok pour chaque fichidr trouvé
+  //ok mettre son nom extension, et emplacement dans la db
+  //ok pour chaque nom de la db
   // nettoyage :
   // abréviation, fautes, etc... (CSV remplacement)
   // racinisation
