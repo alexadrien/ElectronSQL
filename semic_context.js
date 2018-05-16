@@ -2,6 +2,11 @@
 //Évidemment, on peut déduire ce premier groupe de 'lexeme_table.js' ;
 //Il s'agit de la table inverse, à laquelle on a supprimé les "xxx-none".
 
+
+//TO DO :
+// - faire correspondre ces chaïnes avec la sortie du stemmer.
+// - ...
+
 	"petit" : [0],
 	"grand" : [1],
 	"large" : [3],
@@ -41,8 +46,11 @@
 	"vie" : [16],
 	"nuit" : [15],
 	"soir" : [15],
-	"brouhaha" : [13, 16],
+	"brouhaha" : [10, 13, 16],
+	"murmure" : [12],
 	"bruit" : [16],
+	"figuration" : [10],
+	"gens" : [10],
 	"canalisation" : [29, 30]
 
 },
@@ -52,24 +60,31 @@
 	"appartement" : [4],
 	"salon" : [4],
 	"bureau" : [9, 10, 13, 16],
-	"cuisine" : [0, 15, 28, 29],
-	"toilettes" : [0, 15, 28, 29, 30],
-	"salle de bain" : [0, 15, 28, 29, 30],
 	"chambre" : [4, 8, 28, 15],
 	"couloir" : [4],
 	"hotel" : [1, 5, 9, 13],
+
+	"cuisine" : [0, 15, 28, 29],
+	"toilettes" : [0, 15, 28, 29, 30],
+	"salle de bain" : [0, 15, 28, 29, 30],
+	
 	"commissariat" : [9, 10, 13, 16],
+	
 	"usine" : [1, 3, 5, 16, 18, 19],
 	"atelier" : [4, 16, 18],
 	"imprimerie" : [16, 18, 19],
 	"supermarche" : [1, 9, 10, 13, 16],
+	
 	"gare" : [1, 3, 5, 9, 11, 13, 16],
 	"aeroport" : [1, 3, 5, 9, 11, 13, 16],
+
 	"cafe" : [4, 9, 10, 13, 16],
 	"bar" : [4, 9, 10, 13, 16],
 	"brasserie" : [4, 9, 10, 13, 16],
  	"restaurant" : [4, 9, 10, 13, 16],
+ 	
  	"hopital" : [9, 10, 13, 16],
+
  	"eglise" : [1, 3, 5, 8, 15, 29],
  	"grotte" : [1, 3, 5, 8, 15, 29],
  	"hangar" : [1, 3, 5, 8, 15, 21, 22, 28],
