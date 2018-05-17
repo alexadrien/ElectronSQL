@@ -17,6 +17,7 @@ Avant le 19/05 :
  - #V1# Ajout de la colonne "contenu sémantique" et remplissage de cette colonne. #V1# = à partir de _lexeme_table.js_
  - Implémentation de la recherche littérale (_i.e._ renvoyer les sons contenant tous les mots-clefs _après_ nettoyage et _stemmer_).
  - #V1# Implémentation de la recherche par contenu sémantique.
+ - #Théo# Implémentation des _lexèmes quantificateurs_.
  
 Doit être prêt pour la soutenance (entre le 11 et le 22 juin) :
   - Implémentation de _lexeme_tree.js_ et de la recherche par similitude.
