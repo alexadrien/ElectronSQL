@@ -10,22 +10,43 @@
       height: 90vh;
       overflow: scroll;
     }
+
+    header {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .controlbar {
+      display: flex;
+    }
+
+    .baritem {
+      flex: 1;
+    }
   </style>
 </head>
 
 <body>
   <header class="w3-bar w3-green">
     <div href="#" class="w3-bar-item">ElectronSQL</div>
+    <div class="controlbar">
+      <div class="baritem">
+        <input class="w3-input" type="text" placeholder="Recherche">
+      </div>
+      <div class="baritem"></div>
+      <div class="baritem"></div>
+      <div class="baritem"></div>
+    </div>
   </header>
   <main>
     <div class="w3-container" id="searchResult">
       <table class="w3-table">
         <tr>
-          <th>filename</th>
-          <th>purefilename</th>
-          <th>extname</th>
-          <th>completepath</th>
-          <th>semantique</th>
+          <th>Nom</th>
+          <th>Nom épuré</th>
+          <th>Chemin</th>
+          <th>Contenu Sémantique</th>
+          <th>ID</th>
         </tr>
       </table>
     </div>
