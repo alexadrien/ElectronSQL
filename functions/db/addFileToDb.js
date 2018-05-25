@@ -4,13 +4,8 @@ export default async function(filePath, thedb) {
   const fileExt = path.extname(filePath).substring(1);
   const fileName = path.basename(filePath, "." + fileExt);
 
-  var queryString =
-    "INSERT INTO `files` (filename, extname, completepath) VALUES ('";
-  queryString += fileName;
-  queryString += "', '";
-  queryString += fileExt;
-  queryString += "', '";
-  queryString += filePath;
-  queryString += "');";
+  const queryString = `INSERT INTO 'files' 
+  (filename, extname, completepath) 
+  VALUES ("${fileName}","${fileExt}","${filePath}");`;
   await thedb.run(queryString);
 }

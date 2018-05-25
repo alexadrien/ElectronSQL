@@ -12,13 +12,18 @@ import addPureFilename from "../db/addPureFilename";
 import addSemantique from "../db/addSemantique";
 import getSignature from "../semantique/getSignature";
 import getAllDbData from "../db/getAllDbData";
+import buildEquivalence from "../preprocessing/buildEquivalence";
+import getSampleData from "../folder/getSampleData";
 
 export default async function(win, db) {
   db = await createDatabase();
+  const equivalences = await buildEquivalence();
 
   const pathToParse = await askForPath();
 
-  const allFiles = await exploreDirList(pathToParse);
+  // const allFiles = await exploreDirList(pathToParse);
+
+  const allFiles = await getSampleData();
 
   await Promise.all(
     allFiles.map(async filepath => {
@@ -30,8 +35,8 @@ export default async function(win, db) {
 
   await Promise.all(
     allFilenames.map(async ([rowid, filename]) => {
-      const cleaned = cleaning(filename);
-      const pureFilename = rooting(cleaned);
+      const cleaned = await cleaning(filename, equivalences);
+      const pureFilename = await rooting(cleaned);
       await addPureFilename(rowid, pureFilename, db);
     })
   );
