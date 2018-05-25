@@ -3,8 +3,11 @@ Playing with Electron, MySQL and WAV metadata
 
 # Requirements
 Node
+
 Npm
+
 (Yarn)
+
 Electron
 
 # Installation guide
