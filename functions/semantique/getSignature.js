@@ -1,4 +1,19 @@
+import semicContext from "./semicContext.json";
+import tokenizer from "../preprocessing/stem/tokenizer";
+import join from "lodash/join";
+
 export default async function(purefilename) {
-  console.log(purefilename.split(" "));
-  return [0];
+  return join(
+    semicContext.reduce((accumulator, currentValue) => {
+      return Object.keys(currentValue).reduce((accumulator2, currentValue2) => {
+        return purefilename.split(" ").reduce((accumulator3, currentValue3) => {
+          if (currentValue3 == tokenizer(currentValue2, "fr")) {
+            accumulator3.push(currentValue[currentValue2]);
+          }
+          return accumulator3;
+        }, accumulator2);
+      }, accumulator);
+    }, [])
+  );
+  // return [0];
 }
