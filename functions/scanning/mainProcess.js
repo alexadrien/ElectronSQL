@@ -60,12 +60,12 @@ function process() {
   //ok pour chaque fichidr trouvé
   //ok mettre son nom extension, et emplacement dans la db
   //ok pour chaque nom de la db
-  // nettoyage :
-  // abréviation, fautes, etc... (CSV remplacement)
-  // racinisation
-  // algorithme de porter, qui renvoie un nom épuré, qu'on rajoute à la db
-  // pour porter, essayer ca https://github.com/MarkKahn/stem
-  // db complete
+  //ok nettoyage :
+  //ok abréviation, fautes, etc... (CSV remplacement)
+  //ok racinisation
+  //ok algorithme de porter, qui renvoie un nom épuré, qu'on rajoute à la db
+  //ok pour porter, essayer ca https://github.com/MarkKahn/stem
+  //ok db complete
   // analyse sémantique
   // pour chaque nom epuré
   // lancer la fonction de signature sémantiquz
