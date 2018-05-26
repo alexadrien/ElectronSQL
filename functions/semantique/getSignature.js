@@ -15,5 +15,4 @@ export default async function(purefilename) {
       }, accumulator);
     }, [])
   );
-  // return [0];
 }

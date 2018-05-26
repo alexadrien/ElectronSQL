@@ -66,16 +66,16 @@ function process() {
   //ok algorithme de porter, qui renvoie un nom épuré, qu'on rajoute à la db
   //ok pour porter, essayer ca https://github.com/MarkKahn/stem
   //ok db complete
-  // analyse sémantique
-  // pour chaque nom epuré
-  // lancer la fonction de signature sémantiquz
-  // cette fonction :
-  // prend un nom épuré (potentiellement plusieurs mots)
-  // pour chaque mot, aller chercher son contenu semantique dans la hash table dedié à ca (array d'id)
-  // classer les mots par ordre de priorité
-  // faire une liste (avec unicité) des signatures sémantiques
-  // renvoyé ca
-  //Remplir la colonne de signature sémantique
+  //ok analyse sémantique
+  //ok pour chaque nom epuré
+  //ok lancer la fonction de signature sémantiquz
+  //ok cette fonction :
+  //ok prend un nom épuré (potentiellement plusieurs mots)
+  //ok pour chaque mot, aller chercher son contenu semantique dans la hash table dedié à ca (array d'id)
+  //ok classer les mots par ordre de priorité
+  //ok faire une liste (avec unicité) des signatures sémantiques
+  //ok renvoyer ca
+  //ok Remplir la colonne de signature sémantique
   // Créer un champ de recherche
   // Quand l'utiulisateur rentre des mots
   // créer la signature sémantique (voir plus haut)
