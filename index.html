@@ -2,78 +2,98 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>ElectronSQL</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
-    #searchResult {
-      height: 90vh;
-      overflow: scroll;
-    }
+    <meta charset="UTF-8">
+    <title>ElectronSQL</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        #searchResult {
+            height: 90vh;
+            overflow: scroll;
+        }
 
-    header {
-      display: flex;
-      flex-direction: column;
-    }
+        header {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .controlbar {
-      display: flex;
-    }
+        .controlbar {
+            display: flex;
+        }
 
-    .baritem {
-      flex: 1;
-    }
-  </style>
+        .baritem {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body>
-  <header class="w3-bar w3-green">
+<header class="w3-bar w3-green">
     <div href="#" class="w3-bar-item">ElectronSQL</div>
     <div class="controlbar">
-      <div class="baritem">
-        <input class="w3-input" type="text" placeholder="Recherche">
-      </div>
-      <div class="baritem"></div>
-      <div class="baritem"></div>
-      <div class="baritem"></div>
+        <div class="baritem">
+            <input class="w3-input" type="text" id="searchField" placeholder="Recherche">
+        </div>
+        <div class="baritem">
+            <label><input type="checkbox" id="semanticToggle" checked/>semantique</label>
+            <label><input type="checkbox" id="litteralToggle" checked/>litteral</label>
+        </div>
+        <div class="baritem"></div>
+        <div class="baritem"></div>
     </div>
-  </header>
-  <main>
+</header>
+<main>
     <div class="w3-container" id="searchResult">
-      <table class="w3-table">
-        <tr>
-          <th>Nom</th>
-          <th>Nom épuré</th>
-          <th>Extension</th>
-          <th>Chemin</th>
-          <th>Contenu Sémantique</th>
-        </tr>
-      </table>
+        <table class="w3-table">
+            <tr>
+                <th>Nom</th>
+                <th>Nom épuré</th>
+                <th>Extension</th>
+                <th>Chemin</th>
+                <th>Contenu Sémantique</th>
+            </tr>
+        </table>
     </div>
-  </main>
-  <footer class="w3-bar w3-green w3-display-bottommiddle">
+</main>
+<footer class="w3-bar w3-green w3-display-bottommiddle">
     <div class="w3-container">
-      ElectronSQL - Work on a software with file indexing
+        ElectronSQL - Work on a software with file indexing
     </div>
-  </footer>
-  <script>
-    function displayAllData(allTheData){
-      for(var i in allTheData){
-        var currentLine = document.createElement('tr')
-        for(var j in allTheData[i]){
-          var currentCol = document.createElement('td')
-          currentCol.innerHTML = allTheData[i][j]
-          currentLine.appendChild(currentCol)
-        }
-        document.querySelector('table').appendChild(currentLine)
-      }
+</footer>
+<script>
+    function flushAllData() {
+        document.querySelector('table').innerHTML = '';
     }
-    require('electron').ipcRenderer.on('db-data', (event, message) => {
-      console.log(event);
-      console.log(message);
-          displayAllData(message)
-        })
-  </script>
+
+    function displayAllData(allTheData) {
+        flushAllData();
+        for (var i in allTheData) {
+            var currentLine = document.createElement('tr')
+            for (var j in allTheData[i]) {
+                var currentCol = document.createElement('td')
+                currentCol.innerHTML = allTheData[i][j]
+                currentLine.appendChild(currentCol)
+            }
+            document.querySelector('table').appendChild(currentLine)
+        }
+    }
+
+    const back = require('electron').ipcRenderer;
+    back.on('db-data', (event, message) => {
+        displayAllData(message);
+    });
+    back.on('queryResults', (event, message) => {
+        console.log(message);
+        displayAllData(message);
+    });
+    document.getElementById("searchField").onchange = ((e) => {
+        console.log(document.getElementById("litteralToggle").checked);
+        console.log(document.getElementById("semanticToggle").checked);
+        back.send("queryChannel", e.target.value, {
+            litteral: document.getElementById("litteralToggle").checked,
+            semantic: document.getElementById("semanticToggle").checked
+        });
+    });
+</script>
 </body>
 
 </html>

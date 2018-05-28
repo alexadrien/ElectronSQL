@@ -1,9 +1,7 @@
 import createDatabase from "./../db/createDatabase";
 import askForPath from "./../electron/askForPath";
 import sendDataToFront from "./../electron/sendDataToFront";
-import exploreDirList from "./../folder/exploreDirList";
 import addFileToDb from "./../db/addFileToDb";
-import getFilename from "./../folder/getFilename";
 import getAllNames from "../db/getAllNames";
 import getAllPureFilename from "../db/getAllPureFilename";
 import cleaning from "../preprocessing/cleaning";
@@ -11,11 +9,11 @@ import rooting from "../preprocessing/rooting";
 import addPureFilename from "../db/addPureFilename";
 import addSemantique from "../db/addSemantique";
 import getSignature from "../semantique/getSignature";
-import getAllDbData from "../db/getAllDbData";
 import buildEquivalence from "../preprocessing/buildEquivalence";
 import getSampleData from "../folder/getSampleData";
+import declareMessager from '../messager/declareMessage';
 
-export default async function(win, db) {
+export default async function(win, db, ipcMain) {
   db = await createDatabase();
   const equivalences = await buildEquivalence();
 
@@ -51,6 +49,8 @@ export default async function(win, db) {
   );
 
   await sendDataToFront(win, db);
+
+  declareMessager(ipcMain, db);
 }
 
 function process() {
