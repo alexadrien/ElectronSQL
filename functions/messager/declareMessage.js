@@ -1,5 +1,5 @@
 import litteralSearch from '../search/litteralSearch';
-import semanticSearch from '../search/semanticSearch';
+import semanticSearch from '../search/semantiqueSearch';
 import get from 'lodash/get';
 import head from 'lodash/head';
 
@@ -23,7 +23,6 @@ export default function (ipcMain, db) {
 
             }
             event.sender.send("queryResults", litteralReturnedResults.concat(semanticReturnedResults));
-            console.log("oui oui oui");
         } catch (err) {
             console.log(err)
         }

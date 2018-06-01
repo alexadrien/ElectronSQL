@@ -24,12 +24,9 @@ launch `yarn start` in the directory
 # Tout doux
 Avant le 19/05 :
  - *UI* simple : affichage de la _database_ (avec _scrollbar_) et _placeholder_ pour le _player_ audio.
- - Implémentation des équivalences (CSV).
- - Implémentation du _stemmer_.
- - #V1# Ajout de la colonne "contenu sémantique" et remplissage de cette colonne. #V1# = à partir de _lexeme_table.js_
  - Implémentation de la recherche littérale (_i.e._ renvoyer les sons contenant tous les mots-clefs _après_ nettoyage et _stemmer_).
- - #V1# Implémentation de la recherche par contenu sémantique.
- - #Théo# Implémentation des _lexèmes quantificateurs_.
+ - [V1] Implémentation de la recherche par contenu sémantique.
+ - [Théo] Implémentation des _lexèmes quantificateurs_.
  
 Doit être prêt pour la soutenance (entre le 11 et le 22 juin) :
   - Implémentation de _lexeme_tree.js_ et de la recherche par similitude.
