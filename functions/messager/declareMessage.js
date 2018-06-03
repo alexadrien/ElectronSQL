@@ -1,5 +1,5 @@
 import litteralSearch from '../search/litteralSearch';
-import semanticSearch from '../search/semantiqueSearch';
+import semanticSearch from '../search/semanticSearch';
 import get from 'lodash/get';
 import head from 'lodash/head';
 
