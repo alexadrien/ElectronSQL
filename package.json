@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "electron -r babel-register .",
-    "build": "babel index.js"
+    "build": "babel index.js",
+    "pret": "node_modules/.bin/prettier functions/*/*.js --write"
   },
   "repository": {
     "type": "git",
