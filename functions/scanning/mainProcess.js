@@ -50,7 +50,7 @@ export default async function(win, db, ipcMain) {
 
   await sendDataToFront(win, db);
 
-  declareMessager(ipcMain, db);
+  declareMessager(ipcMain, db, equivalences);
 }
 
 function process() {
