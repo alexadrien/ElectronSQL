@@ -19,17 +19,12 @@ For now, when the app start, just select a folder when asked to. It will be pars
 launch `yarn start` in the directory
 
 # Tout doux
-Avant le 19/05 :
- - *UI* simple : affichage de la _database_ (avec _scrollbar_) et _placeholder_ pour le _player_ audio.
- - Implémentation de la recherche littérale (_i.e._ renvoyer les sons contenant tous les mots-clefs _après_ nettoyage et _stemmer_).
- - [V1] Implémentation de la recherche par contenu sémantique.
- - [Théo] Implémentation des _lexèmes quantificateurs_.
- 
+
 Doit être prêt pour la soutenance (entre le 11 et le 22 juin) :
-  - Implémentation de _lexeme_tree.js_ et de la recherche par similitude.
-  - Équivalences complexes (_i.e._ certaines chaînes ne sont que des débuts de mots, _etc._).
-  - Ajouter des cas d'exception au _stemmer_.
+  - Lexèmes "négatifs" (pour forcer l'absence/faire la négation d'un élément dans la signature sémantique).
   - Ajout du _player_ audio (avec _waveform_).
+  - Support du scan de ficher audio.
+  - Équivalences complexes (_i.e._ certaines chaînes ne sont que des débuts de mots, _etc._).
   - Faire la version _Analyse Sémantique Latente_ (:BIG: :Low-prio:).
 
 Optimisations supplémentaires (les fameux "si on a le temps") : _UI_ & _UX_...
