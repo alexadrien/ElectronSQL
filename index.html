@@ -31,7 +31,9 @@
     <div href="#" class="w3-bar-item">ElectronSQL</div>
     <div class="controlbar">
         <div class="baritem">
+            <form id="searchForm">
             <input class="w3-input" type="text" id="searchField" placeholder="Recherche">
+            </form>
         </div>
         <div class="baritem">
             <label><input type="checkbox" id="semanticToggle" checked/>semantique</label>
@@ -82,20 +84,16 @@
         displayAllData(message);
     });
     back.on('queryResults', (event, message) => {
-        console.log(JSON.stringify(message));
         displayAllData(message);
     });
-    document.getElementById("searchField").onchange = ((e) => {
+    document.getElementById("searchForm").onsubmit = ((e) => {
+        e.preventDefault();
         console.log(document.getElementById("litteralToggle").checked);
         console.log(document.getElementById("semanticToggle").checked);
-        back.send("queryChannel", e.target.value, {
+        back.send("queryChannel", e.target.children.searchField.value, {
             litteral: document.getElementById("litteralToggle").checked,
             semantic: document.getElementById("semanticToggle").checked
         });
-    });
-    back.send("queryChannel", "qq app vide eglise", {
-        litteral: false,
-        semantic: true
     });
 
 </script>
