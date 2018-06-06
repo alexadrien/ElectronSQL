@@ -1,14 +1,11 @@
 # ElectronSQL
 Playing with Electron, MySQL and WAV metadata
 
-# Requirements
-Node
-
-Npm
-
-(Yarn)
-
-Electron
+# Testing
+```shell
+npm install
+npm run start
+```
 
 # Installation guide
 This is a simple Electron app so you simply need to ```npm install``` everything.
