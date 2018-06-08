@@ -32,7 +32,7 @@
     <div class="controlbar">
         <div class="baritem">
             <form id="searchForm">
-            <input class="w3-input" type="text" id="searchField" placeholder="Recherche">
+                <input class="w3-input" type="text" id="searchField" placeholder="Recherche">
             </form>
         </div>
         <div class="baritem">
@@ -62,39 +62,51 @@
     </div>
 </footer>
 <script>
-    function flushAllData() {
-        document.querySelector('table').innerHTML = '';
-    }
+  function flushAllData() {
+    document.querySelector('table').innerHTML = '';
+  }
 
-    function displayAllData(allTheData) {
-        flushAllData();
-        for (var i in allTheData) {
-            var currentLine = document.createElement('tr')
-            for (var j in allTheData[i]) {
-                var currentCol = document.createElement('td')
-                currentCol.innerHTML = allTheData[i][j]
-                currentLine.appendChild(currentCol)
-            }
-            document.querySelector('table').appendChild(currentLine)
-        }
+  function displayAllData(allTheData) {
+    flushAllData();
+    for (var i in allTheData) {
+      var currentLine = document.createElement('tr');
+      var currentCol = document.createElement('td');
+      var playButton = document.createElement('button');
+      playButton.innerHTML = "Play";
+      playButton.onclick = function(e){
+        const fileSrc = e.srcElement.parentElement.parentElement.children[4].innerHTML;
+        console.log(fileSrc);
+        var audio = new Audio(fileSrc);
+        audio.play();
+      };
+      currentCol.appendChild(playButton);
+      currentLine.appendChild(currentCol);
+      for (var j in allTheData[i]) {
+        var currentCol = document.createElement('td');
+        currentCol.innerHTML = allTheData[i][j];
+        currentLine.appendChild(currentCol);
+      }
+      currentLine.appendChild(currentCol);
+      document.querySelector('table').appendChild(currentLine)
     }
+  }
 
-    const back = require('electron').ipcRenderer;
-    back.on('db-data', (event, message) => {
-        displayAllData(message);
+  const back = require('electron').ipcRenderer;
+  back.on('db-data', (event, message) => {
+    displayAllData(message);
+  });
+  back.on('queryResults', (event, message) => {
+    displayAllData(message);
+  });
+  document.getElementById("searchForm").onsubmit = ((e) => {
+    e.preventDefault();
+    console.log(document.getElementById("litteralToggle").checked);
+    console.log(document.getElementById("semanticToggle").checked);
+    back.send("queryChannel", e.target.children.searchField.value, {
+      litteral: document.getElementById("litteralToggle").checked,
+      semantic: document.getElementById("semanticToggle").checked
     });
-    back.on('queryResults', (event, message) => {
-        displayAllData(message);
-    });
-    document.getElementById("searchForm").onsubmit = ((e) => {
-        e.preventDefault();
-        console.log(document.getElementById("litteralToggle").checked);
-        console.log(document.getElementById("semanticToggle").checked);
-        back.send("queryChannel", e.target.children.searchField.value, {
-            litteral: document.getElementById("litteralToggle").checked,
-            semantic: document.getElementById("semanticToggle").checked
-        });
-    });
+  });
 
 </script>
 </body>
