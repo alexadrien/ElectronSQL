@@ -40,7 +40,7 @@ export default function(ipcMain, db, equivalences) {
           }, [])
         );
         const sortedIdFound = Object.keys(idFound).sort(function(a, b) {
-          return idFound[a] - idFound[b];
+          return idFound[b] - idFound[a];
         });
         semanticReturnedResults = (await Promise.all(
           sortedIdFound.map(async currentId => {
