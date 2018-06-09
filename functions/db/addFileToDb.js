@@ -1,5 +1,5 @@
 import path from "path";
-import sansAccent from 'sans-accent';
+import sansAccent from "sans-accent";
 
 export default async function(filePath, thedb) {
   const fileExt = path.extname(filePath).substring(1);
