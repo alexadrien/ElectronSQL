@@ -58,7 +58,9 @@
 </main>
 <footer class="w3-bar w3-green w3-display-bottommiddle">
     <div class="w3-container">
-        ElectronSQL - Work on a software with file indexing
+        <audio id="audioPlayer" controls>
+            Your browser does not support the audio element.
+        </audio>
     </div>
 </footer>
 <script>
@@ -75,9 +77,7 @@
       playButton.innerHTML = "Play";
       playButton.onclick = function(e){
         const fileSrc = e.srcElement.parentElement.parentElement.children[4].innerHTML;
-        console.log(fileSrc);
-        var audio = new Audio(fileSrc);
-        audio.play();
+        playSound(fileSrc);
       };
       currentCol.appendChild(playButton);
       currentLine.appendChild(currentCol);
@@ -91,6 +91,10 @@
     }
   }
 
+  function playSound(filePath) {
+    back.send("playChannel", filePath);
+  }
+
   const back = require('electron').ipcRenderer;
   back.on('db-data', (event, message) => {
     displayAllData(message);
@@ -100,13 +104,15 @@
   });
   document.getElementById("searchForm").onsubmit = ((e) => {
     e.preventDefault();
-    console.log(document.getElementById("litteralToggle").checked);
-    console.log(document.getElementById("semanticToggle").checked);
     back.send("queryChannel", e.target.children.searchField.value, {
       litteral: document.getElementById("litteralToggle").checked,
       semantic: document.getElementById("semanticToggle").checked
     });
   });
+  back.on('convertedSong', (event, convertedSong) => {
+    document.getElementById('audioPlayer').src = convertedSong;
+    document.getElementById('audioPlayer').play();
+  })
 
 </script>
 </body>

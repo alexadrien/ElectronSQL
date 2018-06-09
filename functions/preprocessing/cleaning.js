@@ -1,4 +1,4 @@
-import sansAccent from 'sans-accent';
+import sansAccent from "sans-accent";
 
 export default function(filename, equivalences) {
   return Object.keys(equivalences).reduce((accumulator, currentValue) => {
