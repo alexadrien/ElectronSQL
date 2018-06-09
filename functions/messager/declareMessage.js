@@ -2,10 +2,31 @@ import litteralSearch from "../search/litteralSearch";
 import semanticSearch from "../search/semanticSearch";
 import get from "lodash/get";
 import head from "lodash/head";
-import join from "lodash/join";
 import countBy from "lodash/countBy";
+import fs from "fs";
+import dataurl from "dataurl";
+
+const convertSong = filePath => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(dataurl.convert({ data, mimetype: "audio/mp3" }));
+    });
+  });
+};
 
 export default function(ipcMain, db, equivalences) {
+  ipcMain.on("playChannel", async (event, filePath) => {
+    try {
+      const convertedSong = await convertSong(filePath);
+      event.sender.send("convertedSong", convertedSong);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   ipcMain.on("queryChannel", async (event, queryString, searchOptions) => {
     try {
       let litteralReturnedResults = [];
