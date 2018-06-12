@@ -1,6 +1,16 @@
 # ElectronSQL
 Playing with Electron, MySQL and WAV metadata
 
+# Switching version for dev and for demo
+To get the version with all the columns : 
+```shell
+git pull && git checkout master
+```
+To get the version with only the filename and the filepath : 
+```shell
+git pull && git checkout moldus
+```
+
 # Testing
 ```shell
 npm install
