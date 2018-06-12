@@ -9,6 +9,6 @@ export default async win => {
       slashes: true
     })
   );
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   return win;
 };
